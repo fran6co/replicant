@@ -1,0 +1,21 @@
+package replicant;
+
+option py_generic_services = true;
+
+message ChunkInfo {
+    required string id = 1;
+    optional string owner = 2;
+    optional bool frozen = 3;
+}
+
+message Chunk {
+    required string id = 1;
+    optional string owner = 2;
+    optional string chunk = 3;
+}
+
+service ReplicantSrvr {
+    rpc SendChunk(Chunk) returns (ChunkInfo);
+    rpc GetChunk(ChunkInfo) returns (Chunk);
+    rpc UnfreezeChunk(ChunkInfo) returns (ChunkInfo);
+}
